@@ -38,36 +38,4 @@ jobs:
           git add bed_status.json
           git diff --staged --quiet || git commit -m "🌱 재배대 현황 자동 갱신 $(date +'%Y-%m-%d %H:%M KST')"
           git push
-```
 
----
-
-### STEP 2. GitHub Secret 등록
-```
-GitHub 레포 → Settings
-→ Secrets and variables → Actions
-→ New repository secret
-
-Name:  GOOGLE_SERVICE_ACCOUNT_KEY
-Value: 서비스 계정 JSON 파일 내용 전체 붙여넣기
-       (새로 발급받은 키 파일 메모장으로 열어서 전체 복사)
-```
-
----
-
-### STEP 3. 수동으로 테스트 실행
-```
-GitHub → Actions 탭
-→ 재배대 현황 자동 갱신 워크플로우 클릭
-→ Run workflow 버튼 클릭
-→ 초록색 체크 뜨면 성공 ✅
-```
-
----
-
-### STEP 4. Vercel 자동 배포 확인
-
-GitHub에 커밋이 올라가면 Vercel이 자동으로 재배포합니다. 별도 설정 불필요!
-```
-Vercel 대시보드 → Deployments
-→ 새 배포가 생기면 정상
