@@ -30,7 +30,19 @@ jobs:
 
       - name: 키 파일 삭제
         run: rm -f service-account-key.json
-
+        
+      - name: 결과 검증 (빈 파일이면 실패 처리)
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+          with open("bed_status.json") as f:
+              data = json.load(f)
+          if not data:
+              print("❌ bed_status.json이 비어있습니다. 커밋하지 않습니다.")
+              sys.exit(1)
+          print(f"✅ {len(data)}개 재배대 데이터 확인 완료")
+          EOF
+          
       - name: 변경사항 커밋 & 푸시
         run: |
           git config user.name  "github-actions[bot]"
